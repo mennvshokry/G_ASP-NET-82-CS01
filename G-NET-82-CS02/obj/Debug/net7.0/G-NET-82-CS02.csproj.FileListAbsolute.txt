@@ -1,0 +1,15 @@
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/bin/Debug/net7.0/G-NET-82-CS02
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/bin/Debug/net7.0/G-NET-82-CS02.deps.json
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/bin/Debug/net7.0/G-NET-82-CS02.runtimeconfig.json
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/bin/Debug/net7.0/G-NET-82-CS02.dll
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/bin/Debug/net7.0/G-NET-82-CS02.pdb
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.csproj.AssemblyReference.cache
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.GeneratedMSBuildEditorConfig.editorconfig
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.AssemblyInfoInputs.cache
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.AssemblyInfo.cs
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.csproj.CoreCompileInputs.cache
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.dll
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/refint/G-NET-82-CS02.dll
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.pdb
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/G-NET-82-CS02.genruntimeconfig.cache
+/Users/walid/Projects/G-NET-82-CS02/G-NET-82-CS02/obj/Debug/net7.0/ref/G-NET-82-CS02.dll
