@@ -1,0 +1,15 @@
+/Users/walid/Projects/assignment4/assignment4/bin/Debug/net7.0/assignment4
+/Users/walid/Projects/assignment4/assignment4/bin/Debug/net7.0/assignment4.deps.json
+/Users/walid/Projects/assignment4/assignment4/bin/Debug/net7.0/assignment4.runtimeconfig.json
+/Users/walid/Projects/assignment4/assignment4/bin/Debug/net7.0/assignment4.dll
+/Users/walid/Projects/assignment4/assignment4/bin/Debug/net7.0/assignment4.pdb
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.csproj.AssemblyReference.cache
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.GeneratedMSBuildEditorConfig.editorconfig
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.AssemblyInfoInputs.cache
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.AssemblyInfo.cs
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.csproj.CoreCompileInputs.cache
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.dll
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/refint/assignment4.dll
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.pdb
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/assignment4.genruntimeconfig.cache
+/Users/walid/Projects/assignment4/assignment4/obj/Debug/net7.0/ref/assignment4.dll
