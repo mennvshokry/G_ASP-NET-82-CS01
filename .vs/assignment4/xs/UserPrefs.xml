@@ -1,25 +1,4 @@
-﻿<Properties StartupConfiguration="{7A56C15C-DAE2-46D6-A262-4D96CC88DE90}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.assignment4 PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="assignment4/Program.cs">
-    <Files>
-      <File FileName="assignment4/Program.cs" Line="15" Column="1" />
-    </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="assignment4" expanded="True">
-            <Node name="assignment4" expanded="True">
-              <Node name="Program.cs" selected="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
+﻿<Properties StartupConfiguration="{BA4046EE-3EFF-452A-AD84-BB83A673AD88}|Default">
+  <MonoDevelop.Ide.ItemProperties.assignment4 FirstBuild="True" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
