@@ -1,118 +1,274 @@
 ﻿using System;
 
-namespace Session5
+namespace OOP_session_1
 {
-    //Question 4, 5, 6, 7, 8, 9
-    //enum Genre
-    //{
-    //    Fiction,
-    //    NonFiction,
-    //    Science
-    //}
-
-    internal class Book
+    // ==========================================
+    // 1. DeliveryAddress Struct
+    // ==========================================
+    public struct DeliveryAddress
     {
-        // Question 1
-        //private string password = "secret";
+        public string City { get; set; }
+        public string Street { get; set; }
+        public int BuildingNumber { get; set; }
 
-        //=======================================================
+        public DeliveryAddress(string city, string street, int buildingNumber)
+        {
+            City = city;
+            Street = street;
+            BuildingNumber = buildingNumber;
+        }
 
-        //Question 2
-        //internal int copiesInStock = 5;
-
-        //=======================================================
-
-        //Question 3
-        //public string Title;
-
-        //=======================================================
-
-        //Question 4
-        //public Genre Genre { get; set; }
-
-        //=======================================================
-
-
+        public string GetFullAddress()
+        {
+            return $"{BuildingNumber} {Street}, {City}";
+        }
     }
 
-    internal class Program
+    // ==========================================
+    // 2. Shipment Struct
+    // ==========================================
+    public struct Shipment
     {
-        static void Main(string[] args)
+        private string _trackingCode;
+        private string _description;
+        private double _weight;
+        private decimal _deliveryFee;
+
+        public DeliveryAddress Destination { get; set; }
+
+        public string TrackingCode
         {
-            //Question 1
-            //Book myBook = new Book();
-            //Console.WriteLine(myBook.password);
-            /**
-             هيحصل compilation error وال program مش هيشتغل علشان المتغير
-            متعرف private واحنا عاوزين نطبع من class al main
-                **/
+            get => _trackingCode;
+            private set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                    _trackingCode = value;
+            }
+        }
 
-            //=======================================================
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                    _description = value;
+            }
+        }
 
-            // Question 2
-            //Book myBook = new Book();
-            //Console.WriteLine(myBook.copiesInStock);
-            /**
-            هنا ال program هيشتغل معانا عادي جدا علشان ال internal
-            معناها ان اي حاجه مكتوبه في ال program يقدر يشوف ال variable
-            عادي ويستخدمه فالبتالل هيحلص compilation عادي جدا
-            **/
+        public double Weight
+        {
+            get => _weight;
+            set
+            {
+                if (value > 0)
+                    _weight = value;
+            }
+        }
 
-            //=======================================================
+        public decimal DeliveryFee
+        {
+            get => _deliveryFee;
+            private set
+            {
+                if (value > 0)
+                    _deliveryFee = value;
+            }
+        }
 
-            //Question 3
-            //Book myBook = new Book();
-            //myBook.Title = "Backend Programming";
-            //Console.WriteLine(myBook.Title);
+        // Calculated Property
+        public decimal EstimatedCost => DeliveryFee + ((decimal)Weight * 5m);
 
-            //=======================================================
+        // Constructors
+        public Shipment(string trackingCode)
+        {
+            _trackingCode = string.Empty;
+            _description = string.Empty;
+            _weight = 1.0;
+            _deliveryFee = 50m;
+            Destination = new DeliveryAddress("Unknown", "Unknown", 0);
 
-            //Question 4
-            //Book myBook = new Book();
-            //myBook.Genre = Genre.Science;
-            //Console.WriteLine(myBook.Genre);
+            TrackingCode = trackingCode;
+            Description = "Unknown";
+            Weight = 1.0;
+            DeliveryFee = 50m;
+        }
 
-            //=======================================================
+        public Shipment(string trackingCode, string description, double weight, decimal deliveryFee, DeliveryAddress destination)
+        {
+            _trackingCode = string.Empty;
+            _description = string.Empty;
+            _weight = 1.0;
+            _deliveryFee = 50m;
+            Destination = destination;
 
-            //Question 5
-            //Console.WriteLine((int)Genre.Fiction);
-            //Console.WriteLine((int)Genre.NonFiction);
-            //Console.WriteLine((int)Genre.Science);
+            TrackingCode = trackingCode;
+            Description = description;
+            Weight = weight;
+            DeliveryFee = deliveryFee;
+        }
 
-            //=======================================================
+        public void UpdateDeliveryFee(decimal newFee)
+        {
+            if (newFee > 0)
+                DeliveryFee = newFee;
+        }
 
-            //Question 6
-            //int genreNumber = 1;
-            //Genre genreValue = (Genre)genreNumber;
-            //Console.WriteLine(genreValue);
+        public void PrintShipment()
+        {
+            Console.WriteLine($"Tracking Code: {TrackingCode}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Weight: {Weight} KG");
+            Console.WriteLine($"Delivery Fee: {DeliveryFee} EGP");
+            Console.WriteLine($"Destination: {Destination.GetFullAddress()}");
+            Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
+        }
+    }
 
-            //=======================================================
+    // ==========================================
+    // 3. DeliveryCenter Struct
+    // ==========================================
+    public struct DeliveryCenter
+    {
+        private Shipment[] _shipments;
+        private int _count;
 
-            //Question 7
-            //Genre genre = Genre.Fiction;
-            //string genreString = genre.ToString();
-            //Console.WriteLine(genreString);
+        public DeliveryCenter(int capacity = 10)
+        {
+            _shipments = new Shipment[capacity];
+            _count = 0;
+        }
 
-            //=======================================================
+        public bool AddShipment(Shipment shipment)
+        {
+            if (_shipments == null)
+                _shipments = new Shipment[10];
+            if (_count < _shipments.Length)
+{
+    _shipments[_count] = shipment;
+    _count++;
+    return true;
+}
+return false;
+        }
 
-            //Question 8
-            //string genreText = "Science";
-            //Genre genreValue = (Genre)Enum.Parse(typeof(Genre),
-            //    genreText);
-            //Console.WriteLine(genreValue);
+        public Shipment this[int index]
+{
+    get
+    {
+        if (index >= 0 && index < _count)
+            return _shipments[index];
+        return default;
+    }
+    set
+    {
+        if (index >= 0 && index < _count)
+            _shipments[index] = value;
+    }
+}
 
-            //=======================================================
 
-            //Question 9
-            //string genreText = "Mystery";
-            //if(Enum.TryParse(genreText, out Genre result))
-            //{
-            //    Console.WriteLine(result);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Unkown genre!");
-            //}
+public Shipment this[string trackingCode]
+{
+    get
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            if (_shipments[i].TrackingCode != null &&
+                _shipments[i].TrackingCode.Equals(trackingCode, StringComparison.OrdinalIgnoreCase))
+            {
+                return _shipments[i];
+            }
+        }
+        return default;
+    }
+}
+    }
+
+    // ==========================================
+    // 4. Main Program
+    // ==========================================
+    internal class Program
+{
+    static void Main(string[] args)
+    {
+        
+        DeliveryCenter center = new DeliveryCenter(10);
+
+        
+        for (int i = 1; i <= 3; i++)
+        {
+            Console.WriteLine($"Enter Shipment {i} Data");
+
+            Console.Write("Tracking Code: ");
+            string code = Console.ReadLine()!;
+
+            Console.Write("Description: ");
+            string desc = Console.ReadLine()!;
+
+            Console.Write("Weight: ");
+            double weight = double.Parse(Console.ReadLine()!);
+
+            Console.Write("Delivery Fee: ");
+            decimal fee = decimal.Parse(Console.ReadLine()!);
+
+            Console.Write("City: ");
+            string city = Console.ReadLine()!;
+
+            Console.Write("Street: ");
+            string street = Console.ReadLine()!;
+
+            Console.Write("Building Number: ");
+            int bNum = int.Parse(Console.ReadLine()!);
+
+            DeliveryAddress address = new DeliveryAddress(city, street, bNum);
+            Shipment shipment = new Shipment(code, desc, weight, fee, address);
+
+            if (center.AddShipment(shipment))
+            {
+                Console.WriteLine("Shipment added successfully.\n");
+            }
+        }
+
+        
+        Console.WriteLine("--- All Shipments ---");
+        for (int i = 0; i < 3; i++)
+        {
+            Shipment s = center[i];
+            if (s.TrackingCode != null)
+            {
+                s.PrintShipment();
+                Console.WriteLine("--------------------");
+            }
+        }
+
+        
+        Console.Write("Enter a tracking code to search: ");
+        string searchCode = Console.ReadLine()!;
+
+        Shipment foundShipment = center[searchCode];
+
+        if (foundShipment.TrackingCode != null)
+        {
+            Console.WriteLine($"Shipment found: {foundShipment.TrackingCode} - {foundShipment.Description}\n");
+        }
+        else
+        {
+            Console.WriteLine("Shipment not found.\n");
+        }
+
+        
+        Console.WriteLine("--- Struct Copy Test ---");
+        DeliveryAddress originalAddr = new DeliveryAddress("Cairo", "Tahrir Street", 15);
+        DeliveryAddress copiedAddr = originalAddr;
+
+        // Modify copy
+        copiedAddr.Street = "Makram Ebeid Street";
+        copiedAddr.BuildingNumber = 20;
+
+        Console.WriteLine($"Original Address: {originalAddr.GetFullAddress()}");
+        Console.WriteLine($"Copied Address: {copiedAddr.GetFullAddress()}");
         }
     }
 }
+  
