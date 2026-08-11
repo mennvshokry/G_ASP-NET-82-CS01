@@ -1,0 +1,252 @@
+using System;
+using System.Collections.Generic;
+
+namespace Assignment04
+{
+    // ==========================================
+    // Part 01 — Theoretical Answers (In Comments)
+    // ==========================================
+    /*
+    Q1: Abstraction
+    a) Abstraction is the concept of hiding complex internal implementation details 
+       and showing only the essential features of an object to the user.
+
+    b) It reduces complexity, isolates impact of changes, enhances code maintainability, 
+       and enforces a clear interface contract between components.
+
+    Q2: Abstract Classes vs. Interfaces
+    a) - Abstract Classes can contain implementation (code) and state (fields/properties), 
+         supporting single inheritance.
+       - Interfaces contain only declarations/contracts (though modern C# allows default impl), 
+         supporting multiple implementation.
+
+    b) When you want to define a contract for unrelated classes across different class hierarchies, 
+       or when you need multiple inheritance of behavior.
+
+    c) - Inherit from multiple abstract classes: No.
+       - Implement multiple interfaces: Yes.
+    */
+
+    // ==========================================
+    // Supporting Types & Interfaces
+    // ==========================================
+    public class DeliveryAddress
+    {
+        public string Country { get; set; } = string.Empty;
+    }
+
+    public interface ITrackable
+    {
+        string GetTrackingStatus();
+    }
+
+    public interface IInsurable
+    {
+        decimal CalculateInsurance();
+    }
+
+    // ==========================================
+    // Abstract Base Class
+    // ==========================================
+    public abstract class Shipment
+    {
+        public string TrackingCode { get; set; }
+        public string Description { get; set; }
+        public decimal Weight { get; set; }
+        public decimal DeliveryFee { get; set; }
+        public DeliveryAddress Destination { get; set; } = new DeliveryAddress();
+
+        public abstract decimal EstimatedCost { get; }
+        public abstract void PrintShipment();
+    }
+
+    // ==========================================
+    // Derived Shipment Classes
+    // ==========================================
+    public class StandardShipment : Shipment, ITrackable, IInsurable
+    {
+        public override decimal EstimatedCost => DeliveryFee + (Weight * 2m);
+
+        public override void PrintShipment()
+        {
+            Console.WriteLine("Standard Shipment");
+            Console.WriteLine();
+            Console.WriteLine($"Tracking Code : {TrackingCode}");
+            Console.WriteLine($"Description   : {Description}");
+            Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
+        }
+
+        public string GetTrackingStatus() => $"Shipment {TrackingCode} is Ready.";
+
+        public decimal CalculateInsurance() => EstimatedCost * 0.05m;
+    }
+
+    public class ExpressShipment : Shipment, ITrackable, IInsurable
+    {
+        public decimal ExtraFee { get; set; }
+
+        public override decimal EstimatedCost => DeliveryFee + (Weight * 2m) + ExtraFee;
+
+        public override void PrintShipment()
+        {
+            Console.WriteLine("Express Shipment");
+            Console.WriteLine();
+            Console.WriteLine($"Tracking Code : {TrackingCode}");
+            Console.WriteLine($"Extra Fee     : {ExtraFee} EGP");
+            Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
+        }
+
+        public string GetTrackingStatus() => $"Shipment {TrackingCode} is Out for Delivery.";
+
+        public decimal CalculateInsurance() => EstimatedCost * 0.08m;
+    }
+
+    public class InternationalShipment : Shipment, ITrackable, IInsurable
+    {
+        public decimal CustomsFee { get; set; }
+
+        public override decimal EstimatedCost => DeliveryFee + (Weight * 2m) + CustomsFee;
+
+        public override void PrintShipment()
+        {
+            Console.WriteLine("International Shipment");
+            Console.WriteLine();
+            Console.WriteLine($"Tracking Code      : {TrackingCode}");
+            Console.WriteLine($"Destination Country : {Destination.Country}");
+            Console.WriteLine($"Estimated Cost     : {EstimatedCost} EGP");
+        }
+
+        public string GetTrackingStatus() => $"Shipment {TrackingCode} has been Delivered.";
+
+        public decimal CalculateInsurance() => EstimatedCost * 0.12m;
+    }
+
+    // ==========================================
+    // Delivery Classes & Reports
+    // ==========================================
+    public class DeliveryReport
+    {
+        public static void PrintShipment(ITrackable shipment)
+        {
+            Console.WriteLine(shipment.GetTrackingStatus());
+        }
+
+        public static void PrintInsurance(IInsurable shipment)
+        {
+            // Implementation for report printing
+        }
+    }
+
+    public class DeliveryCenter
+    {
+        private List<Shipment> shipments = new List<Shipment>();
+
+        public void AddShipment(Shipment shipment)
+        {
+            shipments.Add(shipment);
+        }
+
+        public void PrintAllShipments()
+        {
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine("Delivery Center");
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine();
+
+            foreach (var s in shipments)
+            {
+                s.PrintShipment();
+                Console.WriteLine("----------------------------------------");
+            }
+        }
+
+        public void PrintTrackingStatuses()
+        {
+            Console.WriteLine("Tracking Status");
+            Console.WriteLine();
+            foreach (var s in shipments)
+            {
+                if (s is ITrackable trackable)
+                {
+                    Console.WriteLine(trackable.GetTrackingStatus());
+                }
+            }
+            Console.WriteLine("----------------------------------------");
+        }
+
+        public void PrintInsuranceCosts()
+        {
+            Console.WriteLine("Insurance");
+            Console.WriteLine();
+            foreach (var s in shipments)
+            {
+                if (s is IInsurable insurable)
+                {
+                    string typeName = s.GetType().Name.Replace("Shipment", " Shipment");
+                    Console.WriteLine($"{typeName} Insurance : {insurable.CalculateInsurance():0.00} EGP");
+                }
+            }
+            Console.WriteLine("----------------------------------------");
+        }
+    }
+
+    // ==========================================
+    // Program Main Entry Point
+    // ==========================================
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // a. Create one StandardShipment
+            var standard = new StandardShipment
+            {
+                TrackingCode = "SH001",
+                Description = "Laptop",
+                DeliveryFee = 45m,
+                Weight = 25m
+            };
+
+            // b. Create one ExpressShipment
+            var express = new ExpressShipment
+            {
+                TrackingCode = "SH002",
+                DeliveryFee = 30m,
+                Weight = 20m,
+                ExtraFee = 30m
+            };
+
+            // c. Create one InternationalShipment
+            var intl = new InternationalShipment
+            {
+                TrackingCode = "SH003",
+                DeliveryFee = 100m,
+                Weight = 30m,
+                CustomsFee = 100m,
+                Destination = new DeliveryAddress { Country = "Germany" }
+            };
+
+            // d. Add all shipments to DeliveryCenter
+            DeliveryCenter center = new DeliveryCenter();
+            center.AddShipment(standard);
+
+
+            center.AddShipment(express);
+            center.AddShipment(intl);
+
+            // e. Print all shipment details
+            center.PrintAllShipments();
+
+            // f. Print tracking status of every shipment
+            center.PrintTrackingStatuses();
+
+            // g. Print insurance cost of every shipment
+            center.PrintInsuranceCosts();
+
+            // h & i. Polymorphism arrays setup
+            ITrackable[] trackables = new ITrackable[] { standard, express, intl };
+            IInsurable[] insurables = new IInsurable[] { standard, express, intl };
+
+            Console.WriteLine("Interface Polymorphism Demonstrated Successfully.");
+        }
+    }
+}
